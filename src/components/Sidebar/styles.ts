@@ -35,6 +35,12 @@ export const NavLink = styled('a', {
     color: '$gray-400',
     textDecoration: 'none',
 
+    transition: 'color 0.2s',
+
+    '&:hover': {
+        color: '$gray-100',
+    },
+    
     '&::before': {
         content: '',
         width: '4px',
