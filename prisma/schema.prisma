@@ -53,7 +53,7 @@ model Book {
   id          String   @id @default(cuid())
   title       String
   author      String
-  summary     String
+  summary     String   @db.Text
   cover_url   String
   total_pages Int
   created_at  DateTime @default(now())
@@ -86,7 +86,7 @@ model CategoriesOnBooks {
 model Rating {
   id          String   @id @default(uuid())
   rate        Int
-  description String
+  description String   @db.Text
   created_at  DateTime @default(now())
 
   book    Book   @relation(fields: [book_id], references: [id])
