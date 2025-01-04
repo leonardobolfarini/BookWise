@@ -46,7 +46,7 @@ CREATE TABLE `books` (
     `title` VARCHAR(191) NOT NULL,
     `author` VARCHAR(191) NOT NULL,
     `summary` VARCHAR(191) NOT NULL,
-    `cover_url` VARCHAR(191) NOT NULL,
+    `cover_id` VARCHAR(191) NOT NULL,
     `total_pages` INTEGER NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `categoryId` VARCHAR(191) NULL,

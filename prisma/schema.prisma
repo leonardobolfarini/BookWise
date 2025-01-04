@@ -54,14 +54,12 @@ model Book {
   title       String
   author      String
   summary     String
-  cover_id    String   @default(cuid())
+  cover_url   String
   total_pages Int
   created_at  DateTime @default(now())
 
-  Category          Category?           @relation(fields: [categoryId], references: [id])
-  categoryId        String?
-  CategoriesOnBooks CategoriesOnBooks[]
-  Rating            Rating[]
+  categories CategoriesOnBooks[]
+  Rating     Rating[]
 
   @@map("books")
 }
@@ -70,8 +68,7 @@ model Category {
   id   String @id @default(cuid())
   name String
 
-  books             Book[]
-  CategoriesOnBooks CategoriesOnBooks[]
+  books CategoriesOnBooks[]
 
   @@map("categories")
 }
