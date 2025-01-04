@@ -69,12 +69,51 @@ export const SideBarFooter = styled('footer', {
         justifyContent: 'center',
         gap: '0.75rem',
     
-        color: '$gray-200',
-        fontWeight: 'bold',
         textDecoration: 'none',
-    
+        color: '$gray-200',
+
         svg: {
-            color: '$green-100'
+            cursor: 'pointer'
+        }
+    },
+
+    variants: {
+        authenticated: {
+            true: {
+                fontSize: '$sm',
+                fontWeight: 'regular',
+                
+                svg: {
+                    color: '#F75A68'
+                },
+
+                div: {
+                    background: '$gradiant-vertical',
+                    borderRadius: '999px',
+                    width: '34px',
+                    height: '34px',
+                },
+                
+                img: {
+                    background: '$gradiant-vertical',
+                    borderRadius: '999px',
+                    width: '32px',
+                    height: '32px',
+
+                    position: 'relative',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)'
+                }
+            },
+
+            false: {            
+                fontWeight: 'bold', 
+
+                svg: {
+                    color: '$green-100'
+                }
+            }
         }
     }
 })
