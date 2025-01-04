@@ -1,4 +1,17 @@
-export const books = [
+export interface BookProps {
+  id: string
+  name: string
+  author: string
+  summary: string
+  cover_url: string
+  total_pages: number
+  categories: {
+    name: string
+    id: string
+  }[]
+}
+
+export const books: BookProps[] = [
     {
       id: 'c8176d86-896a-4c21-9219-6bb28cccaa5f',
       name: '14 Hábitos de Desenvolvedores Altamente Produtivos',

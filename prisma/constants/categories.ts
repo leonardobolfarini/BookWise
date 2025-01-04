@@ -1,4 +1,9 @@
-export const categories = [
+export interface CategoryProps {
+  name: string
+  id: string
+}
+
+export const categories: CategoryProps[] = [
     {
       name: 'Programação',
       id: 'c9f22067-4978-4a24-84a1-7d37f343dfc2',

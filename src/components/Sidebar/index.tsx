@@ -23,7 +23,8 @@ export function Sidebar(){
         queryFn: async () => {
             const response = await api.get('/users')
             return response.data.user
-        }
+        },
+        retry: 2,
     })
     
     const isAuthenticated = !!user

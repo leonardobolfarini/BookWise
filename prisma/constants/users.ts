@@ -1,8 +1,14 @@
-export const users = [
-    {
-      id: '48e458c0-8b1e-4994-b85a-1e1cfcc9dd60',
-      name: 'Jaxson Dias',
-      avatar_url:
+export interface UserProps {
+  id: string
+  name: string
+  avatar_url: string
+}
+
+export const users: UserProps[] = [
+  {
+    id: '48e458c0-8b1e-4994-b85a-1e1cfcc9dd60',
+    name: 'Jaxson Dias',
+    avatar_url:
         'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80',
     },
     {

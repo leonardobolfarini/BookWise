@@ -1,8 +1,14 @@
-import { books } from './constants/books'
-import { categories } from './constants/categories'
-import { ratings } from './constants/ratings'
-import { users } from './constants/users'
-import { PrismaClient } from '@prisma/client'
+import { CategoryProps } from "./constants/categories"
+import { BookProps } from "./constants/books"
+import { RatingProps } from "./constants/ratings"
+import { UserProps } from "./constants/users"
+
+/* eslint-disable @typescript-eslint/no-require-imports */
+const { PrismaClient } = require('@prisma/client')
+const { books } = require('./constants/books')
+const { categories } = require('./constants/categories')
+const { ratings } = require('./constants/ratings')
+const { users } = require('./constants/users')
 
 const prisma = new PrismaClient()
 
@@ -13,7 +19,7 @@ async function main() {
   await prisma.category.deleteMany()
   await prisma.book.deleteMany()
 
-  const usersSeed = users.map((user) => {
+  const usersSeed = users.map((user: UserProps) => {
     return prisma.user.create({
       data: {
         id: user.id,
@@ -23,7 +29,7 @@ async function main() {
     })
   })
 
-  const categoriesSeed = categories.map((category) => {
+  const categoriesSeed = categories.map((category: CategoryProps) => {
     return prisma.category.create({
       data: {
         name: category.name,
@@ -32,7 +38,7 @@ async function main() {
     })
   })
 
-  const booksSeed = books.map((book) => {
+  const booksSeed = books.map((book: BookProps) => {
     return prisma.book.create({
       data: {
         id: book.id,
@@ -43,7 +49,7 @@ async function main() {
         total_pages: book.total_pages,
         categories: {
           create: [
-            ...book.categories.map((category) => {
+            ...book.categories.map((category: CategoryProps) => {
               return {
                 category: {
                   connect: {
@@ -58,7 +64,7 @@ async function main() {
     })
   })
 
-  const ratingsSeed = ratings.map((rating) => {
+  const ratingsSeed = ratings.map((rating: RatingProps) => {
     return prisma.rating.create({
       data: {
         id: rating.id,

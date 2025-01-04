@@ -1,6 +1,14 @@
 import { v4 as uuidv4 } from 'uuid'
 
-export const ratings = [
+export interface RatingProps {
+  id: string
+  rate: number
+  description: string
+  book_id: string
+  user_id: string
+}
+
+export const ratings: RatingProps[] = [
   {
     id: uuidv4(),
     rate: 4,
