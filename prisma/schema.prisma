@@ -1,0 +1,102 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime? @map("email_verified")
+  image         String?
+  Account       Account[]
+  Session       Session[]
+  Rating        Rating[]
+
+  @@map("users")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model Book {
+  id          String   @id @default(cuid())
+  title       String
+  author      String
+  summary     String
+  cover_id    String   @default(cuid())
+  total_pages Int
+  created_at  DateTime @default(now())
+
+  Category          Category?           @relation(fields: [categoryId], references: [id])
+  categoryId        String?
+  CategoriesOnBooks CategoriesOnBooks[]
+  Rating            Rating[]
+
+  @@map("books")
+}
+
+model Category {
+  id   String @id @default(cuid())
+  name String
+
+  books             Book[]
+  CategoriesOnBooks CategoriesOnBooks[]
+
+  @@map("categories")
+}
+
+model CategoriesOnBooks {
+  book_id     String
+  category_id String
+
+  book     Book     @relation(fields: [book_id], references: [id])
+  category Category @relation(fields: [category_id], references: [id])
+
+  @@id([book_id, category_id])
+}
+
+model Rating {
+  id          String   @id @default(uuid())
+  rate        Int
+  description String
+  created_at  DateTime @default(now())
+
+  book    Book   @relation(fields: [book_id], references: [id])
+  book_id String
+
+  user    User   @relation(fields: [user_id], references: [id])
+  user_id String
+
+  @@map("ratings")
+}
