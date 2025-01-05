@@ -28,7 +28,8 @@ export default function Default() {
     const searchParams = useSearchParams()
 
     const categoriesForFilter = searchParams.get('categoriesForFilter') || ''
-
+    const bookOrAuthorName = searchParams.get('bookOrAuthorName') || ''
+    
     const { data: categories } = useQuery<CategoryProps[]>({
         queryKey: ['categories'],
         queryFn: async () => {
@@ -38,11 +39,12 @@ export default function Default() {
     })
 
     const { data: books} = useQuery<BookProps[]>({
-        queryKey: ['books', categoriesForFilter],
+        queryKey: ['books', categoriesForFilter, bookOrAuthorName],
         queryFn: async () => {
             const response = await api.get('/books', {
                 params: {
-                    categoriesForFilter
+                    categoriesForFilter,
+                    bookOrAuthorName
                 }
             })
             return response.data
@@ -69,6 +71,10 @@ export default function Default() {
         router.push(`/explore`)
     }
 
+    function handleSearch(value: string) {
+        router.push(`/explore?bookOrAuthorName=${value}`)
+    }
+
     return (
         <ExploreContainer>
             <ExploreHeader>
@@ -77,7 +83,10 @@ export default function Default() {
                     <h1>Explorar</h1>
                 </header>
                 <div>
-                    <SearchBar placeholder="Buscar livro ou autor" />
+                    <SearchBar
+                        placeholder="Buscar livro ou autor"
+                        onSearch={handleSearch}
+                    />
                 </div>
             </ExploreHeader>
             <ExploreFilters>
