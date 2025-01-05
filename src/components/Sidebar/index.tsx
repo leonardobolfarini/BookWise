@@ -43,7 +43,7 @@ export function Sidebar(){
                     <ChartLineUp  width={24} height={24} />
                     Início
                 </NavLink>
-                <NavLink href="/search" data-active={currentPage === '/search'}>
+                <NavLink href="/explore" data-active={currentPage === '/explore'}>
                     <Binoculars width={24} height={24} />
                     Explorar
                 </NavLink>
