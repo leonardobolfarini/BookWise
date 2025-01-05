@@ -4,6 +4,7 @@ export const BooksCardContainer = styled('div', {
     backgroundColor: '$gray-700',
     borderRadius: '8px',
     padding: '18px 20px',
+    width: '100%',
 
     display: 'flex',
     gap: '20px',
@@ -15,16 +16,20 @@ export const BooksCardContainer = styled('div', {
     variants: {
         size: {
             sm: {
-                maxWidth: '130px',
+                maxWidth: '10rem',
             },
             md: {
-                
+                maxWidth: '25rem',
             }
         }
     }
 })
 
-export const BooksCardImage = styled('div', {})
+export const BooksCardImage = styled('div', {
+    img: {
+        borderRadius: '4px'
+    }
+})
 
 export const BooksCardInfos = styled('div', {
     display: 'flex',
