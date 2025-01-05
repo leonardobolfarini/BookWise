@@ -11,7 +11,12 @@ export const SideBarContainer = styled('aside', {
     margin: '20px auto 16px 20px',
     padding: '2.5rem 3.25rem 1.5rem',
     background: `linear-gradient(250deg, ${theme.colors["green-200"]}, ${theme.colors["purple-200"]}, ${theme.colors["gray-800"]})`,
-    borderRadius: '12px'
+    borderRadius: '12px',
+
+    '@media (max-width: 850px)': {
+        width: 'calc(100% - 40px)',
+        margin: '20px 20px 16px 20px',
+    }
 })
 
 export const SideBarHeader = styled('header', {
