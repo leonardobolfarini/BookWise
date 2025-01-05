@@ -8,19 +8,30 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     const { categoriesForFilter } = req.query
+    const { bookOrAuthorName } = req.query
 
-    if (categoriesForFilter) {
+    if (categoriesForFilter || bookOrAuthorName) {
         const books = await prisma.book.findMany({
             where: {
-                categories: {
-                    some: {
-                        category_id: {
-                            in: typeof categoriesForFilter === 'string' 
-                                ? categoriesForFilter.split(' ')
-                                : categoriesForFilter
+                AND: [
+                    categoriesForFilter ? {
+                        categories: {
+                            some: {
+                                category_id: {
+                                    in: typeof categoriesForFilter === 'string' 
+                                        ? categoriesForFilter.split(' ')
+                                        : categoriesForFilter
+                                }
+                            }
                         }
-                    }
-                }
+                    } : {},
+                    bookOrAuthorName ? {
+                        OR: [
+                            { title: { contains: typeof bookOrAuthorName === 'string' ? bookOrAuthorName : undefined } },
+                            { author: { contains: typeof bookOrAuthorName === 'string' ? bookOrAuthorName : undefined } }
+                        ]
+                    } : {}
+                ]
             },
             select: {
                 id: true,
