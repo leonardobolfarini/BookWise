@@ -1,7 +1,6 @@
 import { CaretRight, ChartLineUp } from "@phosphor-icons/react/dist/ssr";
 import { HomeContainer, HomeHeader, PopularBooks, PopularBooksHeader, RecentReviews } from "./styles";
 import { ReviewBox } from "./components/ReviewBox";
-import { BookCard} from "@/src/components/BookCard";
 
 export default function Home(){
     return (
@@ -26,10 +25,6 @@ export default function Home(){
                             <CaretRight />
                         </a>
                     </PopularBooksHeader>
-                    <BookCard />
-                    <BookCard />
-                    <BookCard />
-                    <BookCard />
                 </PopularBooks>
             </HomeContainer>
         </>
