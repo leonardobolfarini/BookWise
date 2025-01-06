@@ -1,5 +1,6 @@
 import { styled } from "@/src/styles/stitches";
 
+
 export const ReviewCardContainer = styled('div', {
     display: 'flex',
     flexDirection: 'column',
@@ -43,8 +44,8 @@ export const ReviewCardHeader = styled('div', {
 })
 
 export const ImageContainer = styled('div', {
-    width: '42px',
-    height: '42px',
+    width: '44px',
+    height: '44px',
     borderRadius: '999px',
     background: '$gradiant-vertical',
 
