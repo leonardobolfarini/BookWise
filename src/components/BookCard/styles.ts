@@ -9,6 +9,8 @@ export const BooksCardContainer = styled('div', {
     display: 'flex',
     gap: '20px',
 
+    cursor: 'pointer',
+
     '& + &': {
         marginTop: '12px',
     }
