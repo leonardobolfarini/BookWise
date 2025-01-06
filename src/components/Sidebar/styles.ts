@@ -1,6 +1,7 @@
 import { styled, theme } from "@/src/styles/stitches";
 
 export const SideBarContainer = styled('aside', {
+    maxWidth: '232px',
     maxHeight: '920px',
     height: '920px',
 
