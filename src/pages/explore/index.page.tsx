@@ -1,5 +1,5 @@
-import { Binoculars, X } from "@phosphor-icons/react/dist/ssr";
 import { DrawerComponent, DrawerContent, DrawerContentCloseButton, DrawerContentHeader, DrawerContentReviews, ExploreContainer, ExploreContent, ExploreFilters, ExploreHeader } from "./styles";
+import { Binoculars, X } from "@phosphor-icons/react/dist/ssr";
 import { SearchBar } from "@/src/components/SearchBar";
 import { TagBox } from "./components/TagBox/index";
 import { useQuery } from "@tanstack/react-query";
@@ -10,10 +10,8 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { BookInfosCard } from "./components/BookInfosCard";
 import { ReviewCard } from "./components/ReviewCard";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
+import { RatingForm } from "./components/RatingForm";
 
 interface CategoryProps {
     id: string
@@ -43,18 +41,6 @@ interface BookProps {
         };
     }[];
 }
-
-const commentFormSchema = z.object({
-    description: z.string()
-        .min(3, { message: 'A descrição deve ter pelo menos 3 caracteres' })
-        .nullable(),
-    rate: z.number()
-        .min(1, { message: 'A avaliação deve ser pelo menos 1' })
-        .max(5, { message: 'A avaliação deve ser no máximo 5' })
-        .nullable(),
-})
-
-type CommentFormData = z.infer<typeof commentFormSchema>
 
 export default function Default() {
     const router = useRouter()
@@ -90,10 +76,6 @@ export default function Default() {
         }
     })
 
-    const { register, handleSubmit, formState: { errors } } = useForm<CommentFormData>({
-        resolver: zodResolver(commentFormSchema),
-    })
-
     function handleAddFilter(filter: string) {
         if (categoriesForFilter === "") {
             router.push(`/explore?categoriesForFilter=${filter}`)
@@ -122,7 +104,12 @@ export default function Default() {
         setOpenBookId(bookId)
     }
 
-    function handleAddComment(bookId: string) {
+    function handleOpenCommentForm() {
+        if (!isAuthenticated) {
+            console.log('Não autenticado')
+            return
+        }
+
         setOpenCommentForm(true)
     }
 
@@ -204,9 +191,21 @@ export default function Default() {
                                     <DrawerContentReviews>
                                             <header>
                                                 <h2>Avaliações</h2>
-                                                <span>Avaliar</span>
+                                                <button 
+                                                    onClick={handleOpenCommentForm}
+                                                    disabled={openCommentForm}
+                                                >Avaliar</button>
                                             </header>
-                                            {book.Rating.map((review) => {
+                                            {openCommentForm && (
+                                                <RatingForm
+                                                    bookId={book.id}
+                                                    userId={session?.user.id || ''}
+                                                    onClose={() => setOpenCommentForm(false)}
+                                                />
+                                            )}
+                                            {book.Rating
+                                            .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+                                            .map((review) => {
                                                 return (
                                                     <ReviewCard 
                                                         key={review.user.id}
