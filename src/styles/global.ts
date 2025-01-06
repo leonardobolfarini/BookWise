@@ -9,11 +9,12 @@ export const globalStyles = globalCss({
 
     'body, button, input, textarea, select': {
         font: '400 1rem Nunito Sans, sans-serif',
-        lineHeight: '$regular'
+        lineHeight: '$regular',
+        color: '$gray-100',
+        boxShadow: '0 0 0 $colors$purple-100',
     },
 
     'body': {
         backgroundColor: '$gray-800',
-        color: '$gray-100',
     }
 })
