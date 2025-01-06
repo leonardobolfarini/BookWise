@@ -10,6 +10,7 @@ interface BookCardProps {
   cover_url: string
   size?: 'sm' | 'md'
   alreadyRead?: boolean
+  onClick?: () => void
 }
 
 export function BookCard({
@@ -19,9 +20,10 @@ export function BookCard({
   cover_url,
   size = 'md',
   alreadyRead = false,
+  onClick,
 }: BookCardProps) {
   return (
-    <BooksCardContainer size={size} alreadyRead={alreadyRead}>
+    <BooksCardContainer size={size} alreadyRead={alreadyRead} onClick={onClick}>
       <BooksCardImage>
         <Image src={cover_url} alt="" width={64} height={94} />
       </BooksCardImage>
