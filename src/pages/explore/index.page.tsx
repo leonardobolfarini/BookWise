@@ -2,7 +2,7 @@ import { Binoculars, X } from '@phosphor-icons/react/dist/ssr'
 import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
-import { useSession } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import { useState } from 'react'
 
 import { BookCard } from '@/src/components/BookCard'
@@ -10,6 +10,7 @@ import { SearchBar } from '@/src/components/SearchBar'
 import { api } from '@/src/lib/axios'
 
 import { BookInfosCard } from './components/BookInfosCard'
+import { LoginModal } from './components/LoginModal'
 import { RatingForm } from './components/RatingForm'
 import { ReviewCard } from './components/ReviewCard'
 import { TagBox } from './components/TagBox/index'
@@ -63,6 +64,7 @@ export default function Default() {
 
   const [openBookId, setOpenBookId] = useState<string | null>(null)
   const [openCommentForm, setOpenCommentForm] = useState(false)
+  const [openLoginModal, setOpenLoginModal] = useState(false)
 
   const categoriesForFilter = searchParams.get('categoriesForFilter') || ''
   const bookOrAuthorName = searchParams.get('bookOrAuthorName') || ''
@@ -120,132 +122,145 @@ export default function Default() {
 
   function handleOpenCommentForm() {
     if (!isAuthenticated) {
-      console.log('Não autenticado')
+      setOpenLoginModal(true)
       return
     }
 
     setOpenCommentForm(true)
   }
 
+  async function handleLogin(provider: string) {
+    await signIn(provider)
+
+    setOpenLoginModal(false)
+  }
+
   return (
-    <ExploreContainer>
-      <ExploreHeader>
-        <header>
-          <Binoculars width={32} height={32} />
-          <h1>Explorar</h1>
-        </header>
-        <div>
-          <SearchBar
-            placeholder="Buscar livro ou autor"
-            onSearch={handleSearch}
-          />
-        </div>
-      </ExploreHeader>
-      <ExploreFilters>
-        <TagBox
-          checked={categoriesForFilter === ''}
-          onClick={() => handleRemoveFilter()}
-        >
-          Tudo
-        </TagBox>
-        {categories?.map((category) => {
-          return (
-            <TagBox
-              key={category.id}
-              checked={categoriesForFilter?.includes(category.id)}
-              onClick={() => handleAddFilter(category.id)}
-            >
-              {category.name}
-            </TagBox>
-          )
-        })}
-      </ExploreFilters>
-      <ExploreContent>
-        {books?.map((book) => {
-          return (
-            <div key={book.id} onClick={() => handleOpenCloseDrawer(book.id)}>
-              <BookCard
-                title={book.title}
-                author={book.author}
-                averageRating={book.averageRating}
-                cover_url={book.cover_url}
-                size="md"
-              />
-              <DrawerComponent
-                anchor="right"
-                open={openBookId === book.id}
-                onClose={() => handleOpenCloseDrawer(null)}
-                slotProps={{
-                  backdrop: {
-                    sx: {
-                      backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                    },
-                  },
-                }}
+    <>
+      <ExploreContainer>
+        <ExploreHeader>
+          <header>
+            <Binoculars width={32} height={32} />
+            <h1>Explorar</h1>
+          </header>
+          <div>
+            <SearchBar
+              placeholder="Buscar livro ou autor"
+              onSearch={handleSearch}
+            />
+          </div>
+        </ExploreHeader>
+        <ExploreFilters>
+          <TagBox
+            checked={categoriesForFilter === ''}
+            onClick={() => handleRemoveFilter()}
+          >
+            Tudo
+          </TagBox>
+          {categories?.map((category) => {
+            return (
+              <TagBox
+                key={category.id}
+                checked={categoriesForFilter?.includes(category.id)}
+                onClick={() => handleAddFilter(category.id)}
               >
-                <DrawerContent>
-                  <DrawerContentHeader>
-                    <DrawerContentCloseButton>
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          handleOpenCloseDrawer(null)
-                        }}
-                      >
-                        <X width={24} height={24} />
-                      </button>
-                    </DrawerContentCloseButton>
-                    <BookInfosCard
-                      id={book.id}
-                      title={book.title}
-                      author={book.author}
-                      averageRating={book.averageRating}
-                      categories={book.categories}
-                      pages={book.total_pages}
-                      cover_url={book.cover_url}
-                      Rating={book.Rating}
-                    />
-                  </DrawerContentHeader>
-                  <DrawerContentReviews>
-                    <header>
-                      <h2>Avaliações</h2>
-                      <button
-                        onClick={handleOpenCommentForm}
-                        disabled={openCommentForm}
-                      >
-                        Avaliar
-                      </button>
-                    </header>
-                    {openCommentForm && (
-                      <RatingForm
-                        bookId={book.id}
-                        userId={session?.user.id || ''}
-                        onClose={() => setOpenCommentForm(false)}
+                {category.name}
+              </TagBox>
+            )
+          })}
+        </ExploreFilters>
+        <ExploreContent>
+          {books?.map((book) => {
+            return (
+              <div key={book.id} onClick={() => handleOpenCloseDrawer(book.id)}>
+                <BookCard
+                  title={book.title}
+                  author={book.author}
+                  averageRating={book.averageRating}
+                  cover_url={book.cover_url}
+                  size="md"
+                />
+                <DrawerComponent
+                  anchor="right"
+                  open={openBookId === book.id}
+                  onClose={() => handleOpenCloseDrawer(null)}
+                  slotProps={{
+                    backdrop: {
+                      sx: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                      },
+                    },
+                  }}
+                >
+                  <DrawerContent>
+                    <DrawerContentHeader>
+                      <DrawerContentCloseButton>
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            handleOpenCloseDrawer(null)
+                          }}
+                        >
+                          <X width={24} height={24} />
+                        </button>
+                      </DrawerContentCloseButton>
+                      <BookInfosCard
+                        id={book.id}
+                        title={book.title}
+                        author={book.author}
+                        averageRating={book.averageRating}
+                        categories={book.categories}
+                        pages={book.total_pages}
+                        cover_url={book.cover_url}
+                        Rating={book.Rating}
                       />
-                    )}
-                    {book.Rating.sort(
-                      (a, b) =>
-                        new Date(b.created_at).getTime() -
-                        new Date(a.created_at).getTime(),
-                    ).map((review) => {
-                      return (
-                        <ReviewCard
-                          key={review.user.id}
-                          user={review.user}
-                          description={review.description}
-                          created_at={review.created_at}
-                          rate={review.rate}
+                    </DrawerContentHeader>
+                    <DrawerContentReviews>
+                      <header>
+                        <h2>Avaliações</h2>
+                        <button
+                          onClick={handleOpenCommentForm}
+                          disabled={openCommentForm}
+                        >
+                          Avaliar
+                        </button>
+                      </header>
+                      {openCommentForm && (
+                        <RatingForm
+                          bookId={book.id}
+                          userId={session?.user.id || ''}
+                          onClose={() => setOpenCommentForm(false)}
                         />
-                      )
-                    })}
-                  </DrawerContentReviews>
-                </DrawerContent>
-              </DrawerComponent>
-            </div>
-          )
-        })}
-      </ExploreContent>
-    </ExploreContainer>
+                      )}
+                      {book.Rating.sort(
+                        (a, b) =>
+                          new Date(b.created_at).getTime() -
+                          new Date(a.created_at).getTime(),
+                      ).map((review) => {
+                        return (
+                          <ReviewCard
+                            key={review.user.id}
+                            user={review.user}
+                            description={review.description}
+                            created_at={review.created_at}
+                            rate={review.rate}
+                          />
+                        )
+                      })}
+                    </DrawerContentReviews>
+                  </DrawerContent>
+                </DrawerComponent>
+              </div>
+            )
+          })}
+        </ExploreContent>
+      </ExploreContainer>
+      <LoginModal
+        open={openLoginModal}
+        onClose={() => setOpenLoginModal(false)}
+        onLogin={handleLogin}
+      />
+    </>
   )
 }
