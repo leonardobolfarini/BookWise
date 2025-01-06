@@ -15,5 +15,22 @@ export const RatingStarsButton = styled('button', {
 
     '&:disabled': {
         cursor: 'default',
+    },
+
+    variants: {
+        size: {
+            md: {
+                svg: {
+                    width: '16px',
+                    height: '16px',
+                }
+            },
+            lg: {
+                svg: {
+                    width: '28px',
+                    height: '28px',
+                }
+            }
+        }
     }
 })
