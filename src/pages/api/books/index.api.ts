@@ -40,7 +40,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 summary: true,
                 cover_url: true,
                 total_pages: true,
-                Rating: true
+                categories: true,
+                Rating: {
+                    include: {
+                        user: {
+                            select: {
+                                id: true,
+                                name: true,
+                                image: true,
+                            }
+                        }
+                    }
+                }
             }
         })
 
@@ -57,8 +68,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             author: true,
             summary: true,
             cover_url: true,
-        total_pages: true,
-        Rating: true
+            total_pages: true,
+            categories: true,
+            Rating: {
+                include: {
+                    user: {
+                        select: {
+                            id: true,
+                            name: true,
+                            image: true,
+                        }
+                    }
+                }
+            }
         }
     })
 
