@@ -90,6 +90,13 @@ export default function Default() {
     },
   })
 
+  function alreadyReviewed(bookId: string) {
+    const bookViewing = books?.find((book) => book.id === bookId)
+    return bookViewing?.Rating.some(
+      (rating) => rating.user.id === session?.user.id,
+    )
+  }
+
   function handleAddFilter(filter: string) {
     if (categoriesForFilter === '') {
       router.push(`/explore?categoriesForFilter=${filter}`)
@@ -221,7 +228,7 @@ export default function Default() {
                         <h2>Avaliações</h2>
                         <button
                           onClick={handleOpenCommentForm}
-                          disabled={openCommentForm}
+                          disabled={openCommentForm || alreadyReviewed(book.id)}
                         >
                           Avaliar
                         </button>
