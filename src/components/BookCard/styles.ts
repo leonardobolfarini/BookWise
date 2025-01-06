@@ -27,6 +27,23 @@ export const BooksCardContainer = styled(
           maxWidth: '25rem',
         },
       },
+      alreadyRead: {
+        true: {
+          position: 'relative',
+
+          'span[data-read]': {
+            position: 'absolute',
+            top: '0',
+            right: '0',
+            backgroundColor: '$green-300',
+            color: '$green-100',
+            padding: '4px 8px',
+            borderRadius: '0 8px 0 4px',
+            fontSize: '$xs',
+            fontWeight: 'bold',
+          },
+        },
+      },
     },
   },
 )
