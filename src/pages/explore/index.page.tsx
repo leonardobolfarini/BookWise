@@ -186,6 +186,7 @@ export default function Default() {
                   averageRating={book.averageRating}
                   cover_url={book.cover_url}
                   size="md"
+                  alreadyRead={alreadyReviewed(book.id)}
                 />
                 <DrawerComponent
                   anchor="right"
