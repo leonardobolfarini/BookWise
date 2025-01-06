@@ -1,7 +1,7 @@
+import { formatDistanceToNow, isToday } from 'date-fns'
+import { ptBR } from 'date-fns/locale/pt-BR'
 import Image from 'next/image'
 
-import Avatar from '@/src/assets/Avatar.svg'
-import Book from '@/src/assets/Book.svg'
 import { RatingStars } from '@/src/components/RatingStars'
 
 import {
@@ -12,39 +12,53 @@ import {
   ReviewBoxHeader,
 } from './styles'
 
-export function ReviewBox() {
+interface ReviewBoxProps {
+  user: {
+    name: string
+    image: string
+  }
+  book: {
+    title: string
+    author: string
+    cover_url: string
+    summary: string
+  }
+  rating: number
+  created_at: string
+}
+
+export function ReviewBox({ user, book, rating, created_at }: ReviewBoxProps) {
+  const createdAtFormatted = isToday(new Date(created_at))
+    ? 'Hoje'
+    : formatDistanceToNow(new Date(created_at), {
+        addSuffix: true,
+        locale: ptBR,
+      })
+
   return (
     <ReviewBoxContainer>
       <ReviewBoxHeader>
         <header>
-          <Image src={Avatar} width={40} height={40} alt="" />
+          <Image src={user.image} width={40} height={40} alt="" />
           <div>
-            <p>Leonardo Bolfarini</p>
-            <span>Hoje</span>
+            <p>{user.name}</p>
+            <span>{createdAtFormatted}</span>
           </div>
         </header>
         <footer>
-          <RatingStars ratingValue={4} />
+          <RatingStars ratingValue={rating} />
         </footer>
       </ReviewBoxHeader>
       <ReviewBoxContentContainer>
         <ReviewBoxContentImage>
-          <Image src={Book} width={108} height={152} alt="" />
+          <Image src={book.cover_url} width={108} height={152} alt="" />
         </ReviewBoxContentImage>
         <ReviewBoxContent>
           <header>
-            <h1>O Hobbit</h1>
-            <span>J.R.R. Tolkien</span>
+            <h1>{book.title}</h1>
+            <span>{book.author}</span>
           </header>
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non
-            nostrum autem molestiae quidem debitis deleniti earum atque iusto ex
-            quos incidunt, inventore maiores placeat facilis voluptatum? Labore
-            possimus eius distinctio? Semper et sapien proin vitae nisi. Feugiat
-            neque integer donec et aenean posuere amet ultrices. Cras fermentum
-            id pulvinar varius leo a in. Amet libero pharetra nunc elementum
-            fringilla velit ipsum. Sed vulputate massa velit nibh
-          </p>
+          <p>{book.summary}</p>
         </ReviewBoxContent>
       </ReviewBoxContentContainer>
     </ReviewBoxContainer>
