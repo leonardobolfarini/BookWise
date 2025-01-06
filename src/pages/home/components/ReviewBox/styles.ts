@@ -50,11 +50,6 @@ export const ReviewBoxContent = styled('article', {
   overflow: 'hidden',
   textOverflow: 'ellipsis',
 
-  p: {
-    margin: 0,
-    padding: 0,
-  },
-
   header: {
     h1: {
       fontSize: '$md',
@@ -68,5 +63,9 @@ export const ReviewBoxContent = styled('article', {
       lineHeight: '$base',
       color: '$gray-400',
     },
+  },
+
+  p: {
+    marginTop: '1rem',
   },
 })
