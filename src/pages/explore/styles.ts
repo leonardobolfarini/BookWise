@@ -3,7 +3,7 @@ import { Drawer } from "@mui/material";
 
 export const ExploreContainer = styled('div', {
     width: '100%',
-    padding: '72px 96px 0 0',
+    padding: '72px 96px 48px 0',
 })
 
 export const ExploreHeader = styled('div', {
@@ -100,12 +100,21 @@ export const DrawerContentReviews = styled('div', {
             color: '$gray-200',
         },
 
-        span: {
+        button: {
+            background: 'transparent',
+            border: 'none',
+            padding: '0',
+
             fontSize: '$md',
             fontWeight: 'bold',
             color: '$purple-100',
             cursor: 'pointer',
+
             transition: 'color 0.2s',
+            
+            '&:disabled': {
+                display: 'none',
+            },
             
             '&:hover': {
                 color: '$purple-200',
