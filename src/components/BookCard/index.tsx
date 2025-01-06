@@ -9,6 +9,7 @@ interface BookCardProps {
   averageRating: number
   cover_url: string
   size?: 'sm' | 'md'
+  alreadyRead?: boolean
 }
 
 export function BookCard({
@@ -17,9 +18,10 @@ export function BookCard({
   averageRating,
   cover_url,
   size = 'md',
+  alreadyRead = false,
 }: BookCardProps) {
   return (
-    <BooksCardContainer size={size}>
+    <BooksCardContainer size={size} alreadyRead={alreadyRead}>
       <BooksCardImage>
         <Image src={cover_url} alt="" width={64} height={94} />
       </BooksCardImage>
@@ -32,6 +34,7 @@ export function BookCard({
           <RatingStars ratingValue={averageRating} />
         </footer>
       </BooksCardInfos>
+      {alreadyRead && <span data-read>LIDO</span>}
     </BooksCardContainer>
   )
 }
