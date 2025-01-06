@@ -1,13 +1,15 @@
+import { formatDistanceToNow } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
+import Image from 'next/image'
+
 import { RatingStars } from '@/src/components/RatingStars'
+
 import {
   ImageContainer,
   ReviewCardContainer,
   ReviewCardContent,
   ReviewCardHeader,
 } from './styles'
-import { formatDistanceToNow } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
-import Image from 'next/image'
 
 interface ReviewCardProps {
   rate: number

@@ -1,14 +1,16 @@
 import Image from 'next/image'
+
 import Avatar from '@/src/assets/Avatar.svg'
 import Book from '@/src/assets/Book.svg'
+import { RatingStars } from '@/src/components/RatingStars'
+
 import {
   ReviewBoxContainer,
-  ReviewBoxHeader,
   ReviewBoxContent,
-  ReviewBoxContentImage,
   ReviewBoxContentContainer,
+  ReviewBoxContentImage,
+  ReviewBoxHeader,
 } from './styles'
-import { RatingStars } from '@/src/components/RatingStars'
 
 export function ReviewBox() {
   return (

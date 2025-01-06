@@ -1,22 +1,24 @@
-import Image from 'next/image'
-import Logo from '@/src/assets/Logo.svg'
-import {
-  SideBarContainer,
-  SideBarHeader,
-  SideBarFooter,
-  SideBarNav,
-  NavLink,
-} from './styles'
 import {
   Binoculars,
   ChartLineUp,
   SignIn,
   SignOut,
 } from '@phosphor-icons/react/dist/ssr'
-import { usePathname } from 'next/navigation'
-import { api } from '@/src/lib/axios'
 import { useQuery } from '@tanstack/react-query'
+import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { signOut } from 'next-auth/react'
+
+import Logo from '@/src/assets/Logo.svg'
+import { api } from '@/src/lib/axios'
+
+import {
+  NavLink,
+  SideBarContainer,
+  SideBarFooter,
+  SideBarHeader,
+  SideBarNav,
+} from './styles'
 
 interface User {
   id: string

@@ -1,6 +1,7 @@
-import { FormEvent, InputHTMLAttributes, useState } from 'react'
-import { SearchBarContainer, SearchBarInput } from './styles'
 import { MagnifyingGlass } from '@phosphor-icons/react/dist/ssr'
+import { FormEvent, InputHTMLAttributes, useState } from 'react'
+
+import { SearchBarContainer, SearchBarInput } from './styles'
 
 interface SearchBarProps extends InputHTMLAttributes<HTMLInputElement> {
   onSearch: (value: string) => void

@@ -1,6 +1,7 @@
 import Image from 'next/image'
-import { BooksCardContainer, BooksCardImage, BooksCardInfos } from './styles'
+
 import { RatingStars } from '../RatingStars'
+import { BooksCardContainer, BooksCardImage, BooksCardInfos } from './styles'
 
 interface BookCardProps {
   title: string

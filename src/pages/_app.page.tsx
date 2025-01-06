@@ -1,9 +1,10 @@
-import { AppProps } from 'next/app'
-import { globalStyles } from '../styles/global'
-import Layout from '../layouts/AppLayout'
-import { SessionProvider } from 'next-auth/react'
 import { QueryClientProvider } from '@tanstack/react-query'
+import { AppProps } from 'next/app'
+import { SessionProvider } from 'next-auth/react'
+
+import Layout from '../layouts/AppLayout'
 import { queryClient } from '../lib/react-query'
+import { globalStyles } from '../styles/global'
 
 globalStyles()
 

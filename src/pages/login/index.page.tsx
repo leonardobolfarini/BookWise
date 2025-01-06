@@ -1,18 +1,20 @@
-import LoginBannerImage from '@/src/assets/LoginBanner.png'
-import Image from 'next/image'
-import { LoginCard } from './components/LoginCard'
 import {
   GithubLogo,
   GoogleLogo,
   RocketLaunch,
 } from '@phosphor-icons/react/dist/ssr'
-import {
-  LoginContainer,
-  LoginOptionsContainer,
-  LoginBannerContainer,
-} from './styles'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { signIn } from 'next-auth/react'
+
+import LoginBannerImage from '@/src/assets/LoginBanner.png'
+
+import { LoginCard } from './components/LoginCard'
+import {
+  LoginBannerContainer,
+  LoginContainer,
+  LoginOptionsContainer,
+} from './styles'
 
 export default function Login() {
   const router = useRouter()

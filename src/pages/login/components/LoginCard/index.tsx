@@ -1,6 +1,7 @@
 import { IconProps } from '@phosphor-icons/react'
-import { LoginCardContainer, LoginCardContent } from './styles'
 import Image, { StaticImageData } from 'next/image'
+
+import { LoginCardContainer, LoginCardContent } from './styles'
 
 interface LoginCardProps extends React.HTMLProps<HTMLAnchorElement> {
   children: React.ReactNode

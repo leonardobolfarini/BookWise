@@ -1,6 +1,7 @@
 import { Star } from '@phosphor-icons/react/dist/ssr'
-import { RatingStarsButton, RatingStarsContainer } from './styles'
 import { useState } from 'react'
+
+import { RatingStarsButton, RatingStarsContainer } from './styles'
 
 interface RatingStarsProps {
   ratingValue: number

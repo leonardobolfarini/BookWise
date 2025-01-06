@@ -1,9 +1,10 @@
+import { NextApiRequest, NextApiResponse } from 'next'
+
 import { prisma } from '@/src/lib/prisma'
 import {
   averageRating,
   booksWithAverageRating,
 } from '@/src/utils/avarage-rating-books'
-import { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(
   req: NextApiRequest,

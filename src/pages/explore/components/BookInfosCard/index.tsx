@@ -1,15 +1,17 @@
+import { BookmarkSimple, BookOpen } from '@phosphor-icons/react/dist/ssr'
+import { useQuery } from '@tanstack/react-query'
+import Image from 'next/image'
+
 import { RatingStars } from '@/src/components/RatingStars'
+import { api } from '@/src/lib/axios'
+
 import {
-  BookMainInfos,
   BookInfos,
-  CategoryAndPages,
   BookInfosCardContainer,
+  BookMainInfos,
+  CategoryAndPages,
   CategoryAndPagesContainer,
 } from './styles'
-import { BookmarkSimple, BookOpen } from '@phosphor-icons/react/dist/ssr'
-import Image from 'next/image'
-import { api } from '@/src/lib/axios'
-import { useQuery } from '@tanstack/react-query'
 
 interface BookProps {
   id: string

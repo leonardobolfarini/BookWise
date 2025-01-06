@@ -1,3 +1,18 @@
+import { Binoculars, X } from '@phosphor-icons/react/dist/ssr'
+import { useQuery } from '@tanstack/react-query'
+import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
+import { useState } from 'react'
+
+import { BookCard } from '@/src/components/BookCard'
+import { SearchBar } from '@/src/components/SearchBar'
+import { api } from '@/src/lib/axios'
+
+import { BookInfosCard } from './components/BookInfosCard'
+import { RatingForm } from './components/RatingForm'
+import { ReviewCard } from './components/ReviewCard'
+import { TagBox } from './components/TagBox/index'
 import {
   DrawerComponent,
   DrawerContent,
@@ -9,19 +24,6 @@ import {
   ExploreFilters,
   ExploreHeader,
 } from './styles'
-import { Binoculars, X } from '@phosphor-icons/react/dist/ssr'
-import { SearchBar } from '@/src/components/SearchBar'
-import { TagBox } from './components/TagBox/index'
-import { useQuery } from '@tanstack/react-query'
-import { api } from '@/src/lib/axios'
-import { BookCard } from '@/src/components/BookCard'
-import { useRouter } from 'next/router'
-import { useSearchParams } from 'next/navigation'
-import { useState } from 'react'
-import { BookInfosCard } from './components/BookInfosCard'
-import { ReviewCard } from './components/ReviewCard'
-import { useSession } from 'next-auth/react'
-import { RatingForm } from './components/RatingForm'
 
 interface CategoryProps {
   id: string

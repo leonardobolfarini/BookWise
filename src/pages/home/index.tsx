@@ -1,4 +1,6 @@
 import { CaretRight, ChartLineUp } from '@phosphor-icons/react/dist/ssr'
+
+import { ReviewBox } from './components/ReviewBox'
 import {
   HomeContainer,
   HomeHeader,
@@ -6,7 +8,6 @@ import {
   PopularBooksHeader,
   RecentReviews,
 } from './styles'
-import { ReviewBox } from './components/ReviewBox'
 
 export default function Home() {
   return (

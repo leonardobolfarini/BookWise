@@ -1,5 +1,6 @@
-import { styled } from '@/src/styles/stitches'
 import { Drawer } from '@mui/material'
+
+import { styled } from '@/src/styles/stitches'
 
 export const ExploreContainer = styled('div', {
   width: '100%',
