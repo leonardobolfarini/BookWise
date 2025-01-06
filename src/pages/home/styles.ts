@@ -30,11 +30,15 @@ export const RecentReviews = styled('div', {
   flexDirection: 'column',
   gap: '16px',
 
+  marginBottom: '24px',
+
   h2: {
     fontSize: '$sm',
     fontWeight: 'normal',
   },
 })
+
+export const PopularBooks = styled('div', {})
 
 export const PopularBooksHeader = styled('div', {
   display: 'flex',
@@ -58,5 +62,3 @@ export const PopularBooksHeader = styled('div', {
     color: '$purple-100',
   },
 })
-
-export const PopularBooks = styled('div', {})
