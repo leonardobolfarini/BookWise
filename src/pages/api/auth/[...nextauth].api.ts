@@ -1,26 +1,25 @@
-import { prisma } from "@/src/lib/prisma"
-import { PrismaAdapter } from "@auth/prisma-adapter"
-import NextAuth, { NextAuthOptions } from "next-auth"
-import GithubProvider from "next-auth/providers/github"
-import GoogleProvider, { GoogleProfile } from "next-auth/providers/google"
+import { prisma } from '@/src/lib/prisma'
+import { PrismaAdapter } from '@auth/prisma-adapter'
+import NextAuth, { NextAuthOptions } from 'next-auth'
+import GithubProvider from 'next-auth/providers/github'
+import GoogleProvider, { GoogleProfile } from 'next-auth/providers/google'
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     GithubProvider({
-      clientId: process.env.GITHUB_CLIENT_ID ?? "",
-      clientSecret: process.env.GITHUB_CLIENT_SECRET ?? "",
+      clientId: process.env.GITHUB_CLIENT_ID ?? '',
+      clientSecret: process.env.GITHUB_CLIENT_SECRET ?? '',
     }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID ?? "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
+      clientId: process.env.GOOGLE_CLIENT_ID ?? '',
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
       authorization: {
         params: {
           prompt: 'consent',
           access_type: 'offline',
           response_type: 'code',
-          scope:
-            'https://www.googleapis.com/auth/userinfo.profile',
+          scope: 'https://www.googleapis.com/auth/userinfo.profile',
         },
       },
       profile(profile: GoogleProfile) {
@@ -30,7 +29,7 @@ export const authOptions: NextAuthOptions = {
           image: profile.picture,
         }
       },
-    })
+    }),
   ],
   callbacks: {
     async signIn({ user }) {
@@ -45,8 +44,8 @@ export const authOptions: NextAuthOptions = {
         ...session,
         user,
       }
-    }
-  }
+    },
+  },
 }
 
 export default NextAuth(authOptions)

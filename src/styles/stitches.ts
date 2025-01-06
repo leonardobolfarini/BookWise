@@ -1,4 +1,4 @@
-import { createStitches } from "@stitches/react";
+import { createStitches } from '@stitches/react'
 
 export const { styled, css, globalCss, getCssText, theme } = createStitches({
   theme: {
@@ -6,7 +6,7 @@ export const { styled, css, globalCss, getCssText, theme } = createStitches({
       'green-100': '#50b2c0',
       'green-200': '#255d6a',
       'green-300': '#0a313c',
-      
+
       'purple-100': '#8381d9',
       'purple-200': '#2a2879',
 
@@ -23,16 +23,15 @@ export const { styled, css, globalCss, getCssText, theme } = createStitches({
       'gradiant-vertical': 'linear-gradient(to bottom, #7fd1cc, #9694f5)',
     },
     fontSizes: {
-      'sm': '0.875rem',
-      'md': '1rem',
-      'lg': '1.125rem',
-      'xl': '1.25rem',
+      sm: '0.875rem',
+      md: '1rem',
+      lg: '1.125rem',
+      xl: '1.25rem',
       '2xl': '1.5rem',
     },
     lineHeights: {
-      'regular': '160%',
-      'short': '140%',
-    }
+      regular: '160%',
+      short: '140%',
+    },
   },
-});
-
+})

@@ -1,27 +1,27 @@
-import { FormEvent, InputHTMLAttributes, useState } from "react";
-import { SearchBarContainer, SearchBarInput } from "./styles";
-import { MagnifyingGlass } from "@phosphor-icons/react/dist/ssr";
+import { FormEvent, InputHTMLAttributes, useState } from 'react'
+import { SearchBarContainer, SearchBarInput } from './styles'
+import { MagnifyingGlass } from '@phosphor-icons/react/dist/ssr'
 
 interface SearchBarProps extends InputHTMLAttributes<HTMLInputElement> {
-    onSearch: (value: string) => void
+  onSearch: (value: string) => void
 }
 
 export function SearchBar({ onSearch, ...props }: SearchBarProps) {
-    const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState('')
 
-    function handleSubmit(e: FormEvent) {
-        e.preventDefault()
-        onSearch(inputValue)
-    }
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault()
+    onSearch(inputValue)
+  }
 
-    return (
-        <SearchBarContainer as="form" onSubmit={handleSubmit}>
-            <SearchBarInput 
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                {...props} 
-            />
-            <MagnifyingGlass width={24} height={24} />
-        </SearchBarContainer>
-    )
+  return (
+    <SearchBarContainer as="form" onSubmit={handleSubmit}>
+      <SearchBarInput
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        {...props}
+      />
+      <MagnifyingGlass width={24} height={24} />
+    </SearchBarContainer>
+  )
 }

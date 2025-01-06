@@ -1,6 +1,8 @@
-import { styled } from "@/src/styles/stitches";
+import { styled } from '@/src/styles/stitches'
 
-export const BooksCardContainer = styled('div', {
+export const BooksCardContainer = styled(
+  'div',
+  {
     backgroundColor: '$gray-700',
     borderRadius: '8px',
     padding: '18px 20px',
@@ -12,41 +14,43 @@ export const BooksCardContainer = styled('div', {
     cursor: 'pointer',
 
     '& + &': {
-        marginTop: '12px',
-    }
-}, {
+      marginTop: '12px',
+    },
+  },
+  {
     variants: {
-        size: {
-            sm: {
-                maxWidth: '10rem',
-            },
-            md: {
-                maxWidth: '25rem',
-            }
-        }
-    }
-})
+      size: {
+        sm: {
+          maxWidth: '10rem',
+        },
+        md: {
+          maxWidth: '25rem',
+        },
+      },
+    },
+  },
+)
 
 export const BooksCardImage = styled('div', {
-    img: {
-        borderRadius: '4px'
-    }
+  img: {
+    borderRadius: '4px',
+  },
 })
 
 export const BooksCardInfos = styled('div', {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
 
-    h1: {
-        fontSize: '$md',
-        fontWeight: 'bold',
-        lineHeight: '$short',
-    },
+  h1: {
+    fontSize: '$md',
+    fontWeight: 'bold',
+    lineHeight: '$short',
+  },
 
-    span: {
-        fontSize: '$sm',
-        fontWeight: 'normal',
-        color: '$gray-400',
-    },
+  span: {
+    fontSize: '$sm',
+    fontWeight: 'normal',
+    color: '$gray-400',
+  },
 })
