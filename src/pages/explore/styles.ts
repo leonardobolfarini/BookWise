@@ -1,4 +1,5 @@
 import { styled } from "@/src/styles/stitches";
+import { Drawer } from "@mui/material";
 
 export const ExploreContainer = styled('div', {
     width: '100%',
@@ -46,4 +47,69 @@ export const ExploreContent = styled('div', {
     display: 'grid',
     gridTemplateColumns: 'repeat(3, 1fr)',
     gridGap: '1.25rem',
+})
+
+export const DrawerComponent = styled(Drawer, {
+    width: '100%',
+    marginLeft: 'auto',
+    
+    '& .MuiDrawer-paper': {
+        background: '$gray-800',
+        color: '#E6E8F2',
+        width: '100%',
+        maxWidth: '650px',
+    },
+})
+
+export const DrawerContent = styled('div', {
+    height: '100%',
+    padding: '24px 48px 0',
+})
+
+export const DrawerContentHeader = styled('div', {
+    marginBottom: '40px',
+})
+
+export const DrawerContentCloseButton = styled('div', {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginBottom: '16px',
+
+    button: {
+        all: 'unset',
+        lineHeight: 0,
+        cursor: 'pointer',
+        
+    }
+})
+
+export const DrawerContentReviews = styled('div', {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px',
+
+    header: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+
+        h2: {
+            fontSize: '$sm',
+            fontWeight: 'normal',
+            color: '$gray-200',
+        },
+
+        span: {
+            fontSize: '$md',
+            fontWeight: 'bold',
+            color: '$purple-100',
+            cursor: 'pointer',
+            transition: 'color 0.2s',
+            
+            '&:hover': {
+                color: '$purple-200',
+            }
+        }
+    }
 })
