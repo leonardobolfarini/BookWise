@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 import { signIn, useSession } from 'next-auth/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { BookCard } from '@/src/components/BookCard'
 import { SearchBar } from '@/src/components/SearchBar'
@@ -68,6 +68,13 @@ export default function Default() {
 
   const categoriesForFilter = searchParams.get('categoriesForFilter') || ''
   const bookOrAuthorName = searchParams.get('bookOrAuthorName') || ''
+  const cameFromPopularBook = searchParams.get('popularBook')
+
+  useEffect(() => {
+    if (cameFromPopularBook) {
+      setOpenBookId(cameFromPopularBook)
+    }
+  }, [cameFromPopularBook])
 
   const { data: categories } = useQuery<CategoryProps[]>({
     queryKey: ['categories'],
