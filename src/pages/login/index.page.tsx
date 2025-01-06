@@ -9,7 +9,7 @@ import { signIn } from 'next-auth/react'
 
 import LoginBannerImage from '@/src/assets/LoginBanner.png'
 
-import { LoginCard } from './components/LoginCard'
+import { LoginCard } from '../../components/LoginCard'
 import {
   LoginBannerContainer,
   LoginContainer,
