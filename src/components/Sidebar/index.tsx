@@ -59,7 +59,7 @@ export function Sidebar(){
                         <div>
                             <Image src={user.image} alt="" width={32} height={32} />
                         </div>
-                        {user?.name}
+                        {user?.name?.split(' ')[0]}
                         <SignOut width={24} height={24} onClick={handleSignOut} />
                     </a>
                 )}
