@@ -67,6 +67,7 @@ export function BookInfosCard({
           height={242}
           alt={title}
           className="object-cover"
+          priority
         />
         <BookInfos>
           <header>
