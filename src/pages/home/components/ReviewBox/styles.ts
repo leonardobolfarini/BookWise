@@ -1,13 +1,20 @@
 import { styled } from '@/src/styles/stitches'
 
 export const ReviewBoxContainer = styled('div', {
-  maxWidth: '608px',
   width: '100%',
 
   padding: '24px',
   borderRadius: '8px',
 
   backgroundColor: '$gray-700',
+
+  variants: {
+    isLastReview: {
+      true: {
+        backgroundColor: '$gray-600',
+      },
+    },
+  },
 })
 
 export const ReviewBoxHeader = styled('div', {
@@ -30,6 +37,11 @@ export const ReviewBoxHeader = styled('div', {
       color: '$gray-400',
     },
   },
+
+  img: {
+    objectFit: 'cover',
+    borderRadius: '999px',
+  },
 })
 
 export const ReviewBoxContentContainer = styled('div', {
@@ -38,7 +50,14 @@ export const ReviewBoxContentContainer = styled('div', {
   gap: '20px',
 })
 
-export const ReviewBoxContentImage = styled('div', {})
+export const ReviewBoxContentImage = styled('div', {
+  img: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    borderRadius: '4px',
+  },
+})
 
 export const ReviewBoxContent = styled('article', {
   maxHeight: '152px',
@@ -66,6 +85,15 @@ export const ReviewBoxContent = styled('article', {
   },
 
   p: {
-    marginTop: '1rem',
+    marginTop: '1.25rem',
   },
+})
+
+export const ReviewBoxWhenLastReview = styled('div', {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  gap: '16px',
+
+  marginBottom: '0.75rem',
 })
