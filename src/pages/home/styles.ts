@@ -25,6 +25,11 @@ export const HomeContainer = styled('div', {
   margin: '0 6rem',
 })
 
+export const ReviewsContainer = styled('div', {
+  maxWidth: '780px',
+  width: '100%',
+})
+
 export const RecentReviews = styled('div', {
   display: 'flex',
   flexDirection: 'column',
