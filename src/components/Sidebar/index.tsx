@@ -3,6 +3,7 @@ import {
   ChartLineUp,
   SignIn,
   SignOut,
+  User,
 } from '@phosphor-icons/react/dist/ssr'
 import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
@@ -60,6 +61,15 @@ export function Sidebar() {
           <Binoculars width={24} height={24} />
           Explorar
         </NavLink>
+        {isAuthenticated && (
+          <NavLink
+            href={`/users/${user?.id}`}
+            data-active={currentPage === `/users/${user?.id}`}
+          >
+            <User width={24} height={24} />
+            Perfil
+          </NavLink>
+        )}
       </SideBarNav>
       <SideBarFooter authenticated={isAuthenticated}>
         {!isAuthenticated ? (
