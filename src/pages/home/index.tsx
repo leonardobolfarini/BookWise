@@ -3,10 +3,10 @@ import { useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
 
-import { BookProps } from '@/prisma/constants/books'
 import { BookCard } from '@/src/components/BookCard'
 import { api } from '@/src/lib/axios'
 
+import { LastReview } from './components/LastReview'
 import { ReviewBox } from './components/ReviewBox'
 import {
   HomeContainer,
@@ -14,6 +14,7 @@ import {
   PopularBooks,
   PopularBooksHeader,
   RecentReviews,
+  ReviewsContainer,
 } from './styles'
 
 export interface RatingPropsResponse {
@@ -42,8 +43,31 @@ interface BookPropsResponse {
   averageRating: number
 }
 
-export default function Home() {
+interface HomeProps {
+  lastReview: {
+    id: string
+    rate: number
+    description: string
+    created_at: string
+    book_id: string
+    user_id: string
+    book: {
+      id: string
+      title: string
+      author: string
+      cover_url: string
+      summary: string
+    }
+    user: {
+      name: string
+      image: string
+    }
+  } | null
+}
+
+export default function Home({ lastReview }: HomeProps) {
   const { data: session } = useSession()
+  const isAuthenticated = !!session
   const router = useRouter()
 
   const { data: mostRatedBooks } = useQuery<BookPropsResponse[]>({
@@ -73,21 +97,23 @@ export default function Home() {
         <h1>Início</h1>
       </HomeHeader>
       <HomeContainer>
-        <RecentReviews>
-          <h2>Avaliações mais recentes</h2>
-          {recentRatings?.map((rating) => {
-            return (
-              <ReviewBox
-                key={rating.id}
-                book={rating.book}
-                user={rating.user}
-                rating={rating.rate}
-                created_at={rating.created_at}
-              />
-            )
-          })}
-        </RecentReviews>
-
+        <ReviewsContainer>
+          {isAuthenticated && <LastReview lastReview={lastReview} />}
+          <RecentReviews>
+            <h2>Avaliações mais recentes</h2>
+            {recentRatings?.map((rating) => {
+              return (
+                <ReviewBox
+                  key={rating.id}
+                  book={rating.book}
+                  user={rating.user}
+                  rating={rating.rate}
+                  created_at={rating.created_at}
+                />
+              )
+            })}
+          </RecentReviews>
+        </ReviewsContainer>
         <PopularBooks>
           <PopularBooksHeader>
             <h2>Livros populares</h2>
