@@ -6,8 +6,8 @@ import { useSession } from 'next-auth/react'
 import { BookCard } from '@/src/components/BookCard'
 import { api } from '@/src/lib/axios'
 
+import { ReviewBox } from '../../components/ReviewBox'
 import { LastReview } from './components/LastReview'
-import { ReviewBox } from './components/ReviewBox'
 import {
   HomeContainer,
   HomeHeader,
@@ -105,7 +105,12 @@ export default function Home({ lastReview }: HomeProps) {
               return (
                 <ReviewBox
                   key={rating.id}
-                  book={rating.book}
+                  book={{
+                    author: rating.book.author,
+                    title: rating.book.title,
+                    cover_url: rating.book.cover_url,
+                    review: rating.description,
+                  }}
                   user={rating.user}
                   rating={rating.rate}
                   created_at={rating.created_at}
