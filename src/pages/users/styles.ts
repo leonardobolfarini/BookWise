@@ -78,6 +78,8 @@ export const UserProfileInfos = styled('div', {
   flexDirection: 'column',
   gap: '1.5rem',
 
+  maxHeight: '600px',
+
   padding: '0 3.5rem',
   borderLeft: '1px solid $gray-700',
 })
