@@ -10,7 +10,6 @@ import {
   ReviewBoxContent,
   ReviewBoxContentContainer,
   ReviewBoxContentImage,
-  ReviewBoxGridContentContainer,
   ReviewBoxHeader,
   ReviewBoxWhenLastReview,
 } from './styles'
@@ -30,7 +29,6 @@ interface ReviewBoxProps {
   }
   created_at?: string
   variant?: 'primary' | 'secondary'
-  isInProfile?: boolean
 }
 
 export function ReviewBox({
@@ -39,7 +37,6 @@ export function ReviewBox({
   rating,
   created_at,
   variant = 'primary',
-  isInProfile = false,
 }: ReviewBoxProps) {
   const isSecondaryVariant = variant === 'secondary'
 
@@ -56,7 +53,7 @@ export function ReviewBox({
 
   return (
     <ReviewBoxContainer variant={variant}>
-      {!isInProfile && !isSecondaryVariant ? (
+      {!isSecondaryVariant ? (
         <ReviewBoxHeader>
           <header>
             <Image src={user?.image || ''} width={40} height={40} alt="" />
@@ -71,33 +68,26 @@ export function ReviewBox({
         </ReviewBoxHeader>
       ) : null}
 
-      <ReviewBoxContentContainer isInProfile={isInProfile}>
-        <ReviewBoxGridContentContainer isInProfile={isInProfile}>
-          <ReviewBoxContentImage>
-            <Image src={book?.cover_url} width={108} height={152} alt="" />
-          </ReviewBoxContentImage>
-          <ReviewBoxContent isInProfile={isInProfile}>
-            <header>
-              <div>
+      <ReviewBoxContentContainer>
+        <ReviewBoxContentImage>
+          <Image src={book?.cover_url} width={108} height={152} alt="" />
+        </ReviewBoxContentImage>
+        <ReviewBoxContent>
+          <header>
+            <div>
+              {isSecondaryVariant && (
                 <ReviewBoxWhenLastReview>
-                  {isSecondaryVariant && !isInProfile && (
-                    <span>{createdAtFormatted}</span>
-                  )}
-                  {isSecondaryVariant && !isInProfile && (
-                    <RatingStars ratingValue={rating} />
-                  )}
+                  <span>{createdAtFormatted}</span>
+                  <RatingStars ratingValue={rating} />
                 </ReviewBoxWhenLastReview>
-                <h1>{book?.title}</h1>
-                <span>{book?.author}</span>
-              </div>
-            </header>
-            <footer>
-              {isInProfile && <RatingStars ratingValue={rating} />}
-            </footer>
-            {!isInProfile && <p>{book?.review}</p>}
-          </ReviewBoxContent>
-        </ReviewBoxGridContentContainer>
-        {isInProfile && <p>{book?.review}</p>}
+              )}
+              <h1>{book?.title}</h1>
+              <span>{book?.author}</span>
+            </div>
+          </header>
+          <footer></footer>
+          <p>{book?.review}</p>
+        </ReviewBoxContent>
       </ReviewBoxContentContainer>
     </ReviewBoxContainer>
   )

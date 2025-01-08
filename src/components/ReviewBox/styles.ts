@@ -49,39 +49,11 @@ export const ReviewBoxHeader = styled('div', {
 })
 
 export const ReviewBoxContentContainer = styled('div', {
-  variants: {
-    isInProfile: {
-      true: {
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '20px',
-      },
-      false: {
-        display: 'grid',
-        gridTemplateColumns: '108px 1fr',
-        gap: '20px',
-      },
-    },
-  },
-  defaultVariants: {
-    isInProfile: false,
-  },
-})
+  display: 'grid',
+  gridTemplateColumns: '108px 1fr',
+  gap: '20px',
 
-export const ReviewBoxGridContentContainer = styled('div', {
-  variants: {
-    isInProfile: {
-      true: {
-        display: 'grid',
-        gridTemplateColumns: '108px 1fr',
-        gap: '20px',
-      },
-      false: {},
-    },
-  },
-  defaultVariants: {
-    isInProfile: false,
-  },
+  width: '100%',
 })
 
 export const ReviewBoxContentImage = styled('div', {
@@ -102,6 +74,7 @@ export const ReviewBoxContent = styled('div', {
   textOverflow: 'ellipsis',
 
   header: {
+    width: '100%',
     h1: {
       fontSize: '$md',
       fontWeight: 'bold',
@@ -118,20 +91,6 @@ export const ReviewBoxContent = styled('div', {
 
   p: {
     marginTop: '1.25rem',
-  },
-
-  variants: {
-    isInProfile: {
-      true: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-      },
-      false: {},
-    },
-  },
-  defaultVariants: {
-    isInProfile: false,
   },
 })
 
