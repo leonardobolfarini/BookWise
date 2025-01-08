@@ -34,8 +34,11 @@ export const RatingFormProfile = styled('div', {
 })
 
 export const RatingFormProfileImageContainer = styled('div', {
-  width: '44px',
-  height: '44px',
+  maxWidth: 'calc(44px + 2px )',
+  maxHeight: 'calc(44px + 2px )',
+  width: '100%',
+  height: '100%',
+
   borderRadius: '999px',
   background: '$gradiant-vertical',
 
