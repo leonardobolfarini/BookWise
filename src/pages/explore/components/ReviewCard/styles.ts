@@ -43,8 +43,11 @@ export const ReviewCardHeader = styled('div', {
 })
 
 export const ImageContainer = styled('div', {
-  width: '44px',
-  height: '44px',
+  width: '100%',
+  height: '100%',
+  maxWidth: 'calc(44px + 2px )',
+  maxHeight: 'calc(44px + 2px )',
+
   borderRadius: '999px',
   background: '$gradiant-vertical',
 
