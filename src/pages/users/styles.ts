@@ -4,6 +4,28 @@ export const UserProfileContainer = styled('div', {
   margin: '4.5rem 0 2.5rem 6rem',
 })
 
+export const UserProfileForVisitor = styled('div', {
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  gap: '0.75rem',
+
+  maxWidth: 'fit-content',
+  padding: '0.25rem 0.5rem',
+  borderRadius: '4px',
+
+  color: '$gray-200',
+  fontWeight: 'bold',
+  fontSize: '$md',
+  lineHeight: '$base',
+
+  cursor: 'pointer',
+
+  '&:hover': {
+    background: '$gray-700',
+  },
+})
+
 export const UserProfileHeader = styled('header', {
   display: 'flex',
   alignItems: 'center',
