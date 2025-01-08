@@ -2,6 +2,7 @@ import {
   Bookmark,
   BookOpen,
   Books,
+  CaretLeft,
   User,
   UserList,
 } from '@phosphor-icons/react/dist/ssr'
@@ -10,6 +11,7 @@ import { ptBR } from 'date-fns/locale'
 import { GetServerSideProps } from 'next'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
 
 import { ReviewBox } from '@/src/components/ReviewBox'
 import { SearchBar } from '@/src/components/SearchBar'
@@ -18,6 +20,7 @@ import { prisma } from '@/src/lib/prisma'
 import {
   UserProfileContainer,
   UserProfileContent,
+  UserProfileForVisitor,
   UserProfileHeader,
   UserProfileInfos,
   UserProfileInfosDetails,
@@ -49,6 +52,7 @@ interface UserProfileProps {
       }
     }[]
     totalPagesRead: number
+    totalRatings: number
     totalAuthorsRead: number
     mostReadCategory: string
   }
@@ -56,21 +60,28 @@ interface UserProfileProps {
 
 export default function UserProfile({ user }: UserProfileProps) {
   const router = useRouter()
+  const session = useSession()
+
+  const isVisiting =
+    session.data?.user.id !== user.id || session.status === 'unauthenticated'
 
   function handleSearchReview(search: string) {
     router.push(`/users/${user.id}?review=${search}`)
   }
 
-  if (!user) {
-    return <div>Book not found</div>
-  }
-
   return (
     <UserProfileContainer>
-      <UserProfileHeader>
-        <User height={32} width={32} />
-        <h1>Perfil</h1>
-      </UserProfileHeader>
+      {isVisiting ? (
+        <UserProfileForVisitor onClick={() => router.back()}>
+          <CaretLeft width={20} height={20} />
+          <span>Voltar</span>
+        </UserProfileForVisitor>
+      ) : (
+        <UserProfileHeader>
+          <User height={32} width={32} />
+          <h1>Perfil</h1>
+        </UserProfileHeader>
+      )}
       <UserProfileContent>
         <UserProfileReviews>
           <UserProfileSearchBar>
@@ -119,7 +130,7 @@ export default function UserProfile({ user }: UserProfileProps) {
             <UserProfileInfosDetailsItem>
               <Books width={32} height={32} />
               <div>
-                <p>{user.ratings.length}</p>
+                <p>{user.totalRatings}</p>
                 <span>Livros avaliados</span>
               </div>
             </UserProfileInfosDetailsItem>
@@ -166,6 +177,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       name: true,
       image: true,
       createdAt: true,
+      Rating: true,
     },
   })
 
@@ -175,7 +187,20 @@ export const getServerSideProps: GetServerSideProps = async ({
     }
   }
 
-  const ratings = await prisma.rating.findMany({
+  const allRatings = await prisma.rating.findMany({
+    where: {
+      user_id: userId,
+    },
+    include: {
+      book: {
+        include: {
+          categories: true,
+        },
+      },
+    },
+  })
+
+  const filteredRatings = await prisma.rating.findMany({
     where: {
       user_id: userId,
       ...(review
@@ -205,7 +230,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   })
 
   const memberSince = getYear(user.createdAt)
-  const ratingsWithFormattedDate = ratings.map((rating) => {
+  const ratingsWithFormattedDate = filteredRatings.map((rating) => {
     const createdAt = formatDistanceToNow(new Date(rating.created_at), {
       addSuffix: true,
       locale: ptBR,
@@ -221,11 +246,11 @@ export const getServerSideProps: GetServerSideProps = async ({
     }
   })
 
-  const totalPagesRead = ratings.reduce((acc, rating) => {
+  const totalPagesRead = allRatings.reduce((acc, rating) => {
     return acc + rating.book.total_pages
   }, 0)
 
-  const authorsReadList = ratings.reduce<string[]>((previous, next) => {
+  const authorsReadList = allRatings.reduce<string[]>((previous, next) => {
     if (previous.includes(next.book.author)) {
       return previous
     }
@@ -234,7 +259,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const totalAuthorsRead = authorsReadList.length
 
-  const categoriesCount = ratings.reduce<Record<string, number>>(
+  const categoriesCount = allRatings.reduce<Record<string, number>>(
     (acc, rating) => {
       rating.book.categories.forEach((category) => {
         if (!acc[category.category_id]) {
@@ -262,6 +287,7 @@ export const getServerSideProps: GetServerSideProps = async ({
         name: user.name,
         avatarUrl: user.image,
         ratings: ratingsWithFormattedDate,
+        totalRatings: allRatings.length,
         memberSince,
         totalPagesRead,
         mostReadCategory,
