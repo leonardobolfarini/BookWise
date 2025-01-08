@@ -13,10 +13,10 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
 
-import { ReviewBox } from '@/src/components/ReviewBox'
 import { SearchBar } from '@/src/components/SearchBar'
 import { prisma } from '@/src/lib/prisma'
 
+import { ProfileReviewBox } from './components/ProfileReviewBox'
 import {
   UserProfileContainer,
   UserProfileContent,
@@ -93,7 +93,7 @@ export default function UserProfile({ user }: UserProfileProps) {
           {user.ratings.map((rating) => (
             <UserProfileReviewWithDate key={rating.id}>
               <span>{rating.created_at}</span>
-              <ReviewBox
+              <ProfileReviewBox
                 book={{
                   author: rating.book.author,
                   title: rating.book.title,
@@ -101,7 +101,6 @@ export default function UserProfile({ user }: UserProfileProps) {
                   review: rating.description,
                 }}
                 rating={rating.rate}
-                isInProfile={true}
               />
             </UserProfileReviewWithDate>
           ))}
