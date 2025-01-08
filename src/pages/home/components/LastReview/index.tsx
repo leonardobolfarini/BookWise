@@ -2,7 +2,7 @@ import { CaretRight } from '@phosphor-icons/react/dist/ssr'
 import { Rating } from '@prisma/client'
 import { useRouter } from 'next/router'
 
-import { ReviewBox } from '../ReviewBox'
+import { ReviewBox } from '../../../../components/ReviewBox'
 import { LastReviewContainer } from './styles'
 
 interface RatingResponse extends Omit<Rating, 'created_at'> {
@@ -33,10 +33,15 @@ export function LastReview({ lastReview }: LastReviewProps) {
         </span>
       </div>
       <ReviewBox
-        book={lastReview.book}
+        book={{
+          author: lastReview.book.author,
+          title: lastReview.book.title,
+          cover_url: lastReview.book.cover_url,
+          review: lastReview.description,
+        }}
         rating={lastReview.rate}
         created_at={lastReview.created_at}
-        lastReview
+        variant="secondary"
       />
     </LastReviewContainer>
   )
