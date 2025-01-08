@@ -6,14 +6,18 @@ export const ReviewBoxContainer = styled('div', {
   padding: '24px',
   borderRadius: '8px',
 
-  backgroundColor: '$gray-700',
-
   variants: {
-    isLastReview: {
-      true: {
+    variant: {
+      primary: {
+        backgroundColor: '$gray-700',
+      },
+      secondary: {
         backgroundColor: '$gray-600',
       },
     },
+  },
+  defaultVariants: {
+    variant: 'primary',
   },
 })
 
@@ -45,21 +49,49 @@ export const ReviewBoxHeader = styled('div', {
 })
 
 export const ReviewBoxContentContainer = styled('div', {
-  display: 'grid',
-  gridTemplateColumns: '108px 1fr',
-  gap: '20px',
+  variants: {
+    isInProfile: {
+      true: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '20px',
+      },
+      false: {
+        display: 'grid',
+        gridTemplateColumns: '108px 1fr',
+        gap: '20px',
+      },
+    },
+  },
+  defaultVariants: {
+    isInProfile: false,
+  },
+})
+
+export const ReviewBoxGridContentContainer = styled('div', {
+  variants: {
+    isInProfile: {
+      true: {
+        display: 'grid',
+        gridTemplateColumns: '108px 1fr',
+        gap: '20px',
+      },
+      false: {},
+    },
+  },
+  defaultVariants: {
+    isInProfile: false,
+  },
 })
 
 export const ReviewBoxContentImage = styled('div', {
   img: {
-    width: '100%',
-    height: '100%',
     objectFit: 'cover',
     borderRadius: '4px',
   },
 })
 
-export const ReviewBoxContent = styled('article', {
+export const ReviewBoxContent = styled('div', {
   maxHeight: '152px',
   height: '100%',
 
@@ -86,6 +118,20 @@ export const ReviewBoxContent = styled('article', {
 
   p: {
     marginTop: '1.25rem',
+  },
+
+  variants: {
+    isInProfile: {
+      true: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      },
+      false: {},
+    },
+  },
+  defaultVariants: {
+    isInProfile: false,
   },
 })
 
