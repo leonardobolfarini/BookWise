@@ -21,7 +21,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     where: {
       user_id: session.user.id,
     },
-    include: {
+    select: {
+      id: true,
+      description: true,
+      created_at: true,
+      rate: true,
       book: true,
       user: true,
     },
