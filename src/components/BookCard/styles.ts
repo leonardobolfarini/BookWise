@@ -4,6 +4,7 @@ export const BooksCardContainer = styled(
   'div',
   {
     backgroundColor: '$gray-700',
+    border: '2px solid transparent',
     borderRadius: '8px',
     padding: '18px 20px',
     width: '100%',
@@ -13,8 +14,14 @@ export const BooksCardContainer = styled(
 
     cursor: 'pointer',
 
+    transition: 'all 0.2s',
+
     '& + &': {
       marginTop: '12px',
+    },
+
+    '&:hover': {
+      border: '2px solid $gray-600',
     },
   },
   {
