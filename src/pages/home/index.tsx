@@ -29,6 +29,7 @@ export interface RatingPropsResponse {
     summary: string
   }
   user: {
+    id: string
     name: string
     image: string
   }
@@ -59,6 +60,7 @@ interface HomeProps {
       summary: string
     }
     user: {
+      id: string
       name: string
       image: string
     }
@@ -98,7 +100,9 @@ export default function Home({ lastReview }: HomeProps) {
       </HomeHeader>
       <HomeContainer>
         <ReviewsContainer>
-          {isAuthenticated && <LastReview lastReview={lastReview} />}
+          {isAuthenticated && lastReview && (
+            <LastReview lastReview={lastReview} />
+          )}
           <RecentReviews>
             <h2>Avaliações mais recentes</h2>
             {recentRatings?.map((rating) => {
