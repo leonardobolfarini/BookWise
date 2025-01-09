@@ -15,8 +15,10 @@ export const ReviewCardHeader = styled('div', {
   justifyContent: 'space-between',
 
   header: {
+    width: '100%',
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'flex-start',
     gap: '16px',
 
     img: {
@@ -24,36 +26,27 @@ export const ReviewCardHeader = styled('div', {
       height: '40px',
       borderRadius: '999px',
     },
-
-    div: {
-      h3: {
-        fontSize: '$md',
-        fontWeight: 'bold',
-        color: '$gray-100',
-        lineHeight: '$short',
-      },
-      span: {
-        fontSize: '$sm',
-        color: '$gray-400',
-        lineHeight: '$base',
-        fontWeight: 'normal',
-      },
-    },
+  },
+  footer: {
+    whiteSpace: 'nowrap',
   },
 })
 
-export const ImageContainer = styled('div', {
-  width: '100%',
-  height: '100%',
-  maxWidth: 'calc(44px + 2px )',
-  maxHeight: 'calc(44px + 2px )',
-
-  borderRadius: '999px',
-  background: '$gradiant-vertical',
-
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+export const ReviewCardHeaderContent = styled('div', {
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  h3: {
+    fontSize: '$md',
+    fontWeight: 'bold',
+    color: '$gray-100',
+    lineHeight: '$short',
+  },
+  span: {
+    fontSize: '$sm',
+    color: '$gray-400',
+    lineHeight: '$base',
+    fontWeight: 'normal',
+  },
 })
 
 export const ReviewCardContent = styled('div', {})

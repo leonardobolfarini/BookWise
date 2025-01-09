@@ -92,25 +92,6 @@ export const SideBarFooter = styled('footer', {
         svg: {
           color: '#F75A68',
         },
-
-        div: {
-          background: '$gradiant-vertical',
-          borderRadius: '999px',
-          width: '34px',
-          height: '34px',
-        },
-
-        img: {
-          background: '$gradiant-vertical',
-          borderRadius: '999px',
-          width: '32px',
-          height: '32px',
-
-          position: 'relative',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-        },
       },
 
       false: {

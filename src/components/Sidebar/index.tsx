@@ -13,6 +13,7 @@ import { signOut } from 'next-auth/react'
 import Logo from '@/src/assets/Logo.svg'
 import { api } from '@/src/lib/axios'
 
+import { Avatar } from '../Avatar'
 import {
   NavLink,
   SideBarContainer,
@@ -79,9 +80,12 @@ export function Sidebar() {
           </a>
         ) : (
           <a>
-            <div>
-              <Image src={user.image} alt="" width={32} height={32} />
-            </div>
+            <Avatar
+              src={user.image}
+              alt={user.name || ''}
+              size="sm"
+              hasBorder
+            />
             {user?.name?.split(' ')[0]}
             <SignOut width={24} height={24} onClick={handleSignOut} />
           </a>

@@ -9,10 +9,10 @@ import {
 import { formatDistanceToNow, getYear } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { GetServerSideProps } from 'next'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
 
+import { Avatar } from '@/src/components/Avatar'
 import { SearchBar } from '@/src/components/SearchBar'
 import { prisma } from '@/src/lib/prisma'
 
@@ -26,7 +26,6 @@ import {
   UserProfileInfosDetails,
   UserProfileInfosDetailsItem,
   UserProfileInfosHeader,
-  UserProfileInfosImageContainer,
   UserProfileReviews,
   UserProfileReviewWithDate,
   UserProfileSearchBar,
@@ -106,14 +105,7 @@ export default function UserProfile({ user }: UserProfileProps) {
           ))}
         </UserProfileReviews>
         <UserProfileInfos>
-          <UserProfileInfosImageContainer>
-            <Image
-              src={user.avatarUrl}
-              alt="User Image"
-              width={70}
-              height={70}
-            />
-          </UserProfileInfosImageContainer>
+          <Avatar src={user.avatarUrl} alt="User Image" size="lg" hasBorder />
           <UserProfileInfosHeader>
             <h1>{user.name}</h1>
             <span>membro desde {user.memberSince}</span>

@@ -5,6 +5,7 @@ import { useMemo } from 'react'
 
 import { RatingStars } from '@/src/components/RatingStars'
 
+import { Avatar } from '../Avatar'
 import {
   ReviewBoxContainer,
   ReviewBoxContent,
@@ -56,7 +57,7 @@ export function ReviewBox({
       {!isSecondaryVariant ? (
         <ReviewBoxHeader>
           <header>
-            <Image src={user?.image || ''} width={40} height={40} alt="" />
+            <Avatar src={user?.image || ''} alt={user?.name || ''} size="md" />
             <div>
               <p>{user?.name}</p>
               <span>{createdAtFormatted}</span>

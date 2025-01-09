@@ -84,23 +84,6 @@ export const UserProfileInfos = styled('div', {
   borderLeft: '1px solid $gray-700',
 })
 
-export const UserProfileInfosImageContainer = styled('div', {
-  width: '74px',
-  height: '74px',
-  borderRadius: '999px',
-  background: '$gradiant-vertical',
-
-  img: {
-    borderRadius: '999px',
-    objectFit: 'cover',
-
-    position: 'relative',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-  },
-})
-
 export const UserProfileInfosHeader = styled('div', {
   display: 'flex',
   flexDirection: 'column',

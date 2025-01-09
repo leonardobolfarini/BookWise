@@ -65,6 +65,7 @@ export const DrawerComponent = styled(Drawer, {
 export const DrawerContent = styled('div', {
   height: '100%',
   padding: '24px 48px 0',
+  marginBottom: '48px',
 })
 
 export const DrawerContentHeader = styled('div', {

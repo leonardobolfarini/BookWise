@@ -33,23 +33,6 @@ export const RatingFormProfile = styled('div', {
   },
 })
 
-export const RatingFormProfileImageContainer = styled('div', {
-  width: '44px',
-  height: '44px',
-  borderRadius: '999px',
-  background: '$gradiant-vertical',
-
-  img: {
-    borderRadius: '999px',
-    objectFit: 'cover',
-
-    position: 'relative',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-  },
-})
-
 export const RatingFormTextarea = styled('textarea', {
   background: '$gray-800',
   border: '1px solid $gray-500',

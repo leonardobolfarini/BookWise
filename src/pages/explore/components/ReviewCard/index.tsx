@@ -1,14 +1,14 @@
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
-import Image from 'next/image'
 
+import { Avatar } from '@/src/components/Avatar'
 import { RatingStars } from '@/src/components/RatingStars'
 
 import {
-  ImageContainer,
   ReviewCardContainer,
   ReviewCardContent,
   ReviewCardHeader,
+  ReviewCardHeaderContent,
 } from './styles'
 
 interface ReviewCardProps {
@@ -37,18 +37,11 @@ export function ReviewCard({
     <ReviewCardContainer>
       <ReviewCardHeader>
         <header>
-          <ImageContainer>
-            <Image
-              src={user.image || '/default-avatar.png'}
-              alt={user.name || 'Usuário'}
-              width={40}
-              height={40}
-            />
-          </ImageContainer>
-          <div>
+          <Avatar src={user.image} alt={user.name} size="md" hasBorder />
+          <ReviewCardHeaderContent>
             <h3>{user.name}</h3>
             <span>{createdAt}</span>
-          </div>
+          </ReviewCardHeaderContent>
         </header>
         <footer>
           <RatingStars ratingValue={rate} />

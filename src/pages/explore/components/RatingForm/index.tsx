@@ -1,11 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Check, X } from '@phosphor-icons/react/dist/ssr'
 import { useMutation } from '@tanstack/react-query'
-import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { Avatar } from '@/src/components/Avatar'
 import { RatingStars } from '@/src/components/RatingStars'
 import { api } from '@/src/lib/axios'
 import { queryClient } from '@/src/lib/react-query'
@@ -17,7 +17,6 @@ import {
   RatingFormFooterButton,
   RatingFormHeader,
   RatingFormProfile,
-  RatingFormProfileImageContainer,
   RatingFormTextarea,
 } from './styles'
 
@@ -137,14 +136,12 @@ export function RatingForm({ bookId, userId, onClose }: RatingFormProps) {
     <RatingFormContainer onSubmit={handleSubmit(handleSubmitRating)}>
       <RatingFormHeader>
         <RatingFormProfile>
-          <RatingFormProfileImageContainer>
-            <Image
-              src={session?.user?.image || '/default-avatar.png'}
-              alt=""
-              width={40}
-              height={40}
-            />
-          </RatingFormProfileImageContainer>
+          <Avatar
+            src={session?.user?.image || ''}
+            alt={session?.user?.name || ''}
+            size="sm"
+            hasBorder
+          />
           <h3>{session?.user?.name}</h3>
         </RatingFormProfile>
         <RatingStars
