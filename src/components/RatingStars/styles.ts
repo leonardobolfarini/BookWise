@@ -13,6 +13,12 @@ export const RatingStarsButton = styled('button', {
     color: '$purple-100',
   },
 
+  '&:not(:disabled):hover': {
+    svg: {
+      color: '$purple-200',
+    },
+  },
+
   '&:disabled': {
     cursor: 'default',
   },
