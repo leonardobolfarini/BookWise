@@ -140,6 +140,7 @@ export function RatingForm({ bookId, userId, onClose }: RatingFormProps) {
             src={session?.user?.image || ''}
             alt={session?.user?.name || ''}
             size="sm"
+            userId={userId}
             hasBorder
           />
           <h3>{session?.user?.name}</h3>

@@ -37,7 +37,13 @@ export function ReviewCard({
     <ReviewCardContainer>
       <ReviewCardHeader>
         <header>
-          <Avatar src={user.image} alt={user.name} size="md" hasBorder />
+          <Avatar
+            src={user.image}
+            alt={user.name}
+            size="md"
+            userId={user.id}
+            hasBorder
+          />
           <ReviewCardHeaderContent>
             <h3>{user.name}</h3>
             <span>{createdAt}</span>
