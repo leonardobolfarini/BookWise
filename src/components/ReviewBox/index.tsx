@@ -25,6 +25,7 @@ interface ReviewBoxProps {
   rating: number
 
   user?: {
+    id: string
     name: string
     image: string
   }
@@ -57,7 +58,12 @@ export function ReviewBox({
       {!isSecondaryVariant ? (
         <ReviewBoxHeader>
           <header>
-            <Avatar src={user?.image || ''} alt={user?.name || ''} size="md" />
+            <Avatar
+              src={user?.image || ''}
+              alt={user?.name || ''}
+              size="md"
+              userId={user?.id}
+            />
             <div>
               <p>{user?.name}</p>
               <span>{createdAtFormatted}</span>
