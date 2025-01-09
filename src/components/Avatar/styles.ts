@@ -14,6 +14,8 @@ export const AvatarContainer = styled('div', {
     transform: 'translate(-50%, -50%)',
   },
 
+  cursor: 'pointer',
+
   variants: {
     hasBorder: {
       true: {
