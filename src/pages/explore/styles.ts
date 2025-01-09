@@ -81,7 +81,15 @@ export const DrawerContentCloseButton = styled('div', {
     all: 'unset',
     lineHeight: 0,
     cursor: 'pointer',
+
+    '&:hover': {
+      svg: {
+        color: '$gray-500',
+      },
+    },
   },
+
+  transition: 'all 0.2s',
 })
 
 export const DrawerContentReviews = styled('div', {
