@@ -189,6 +189,9 @@ export const getServerSideProps: GetServerSideProps = async ({
         },
       },
     },
+    orderBy: {
+      created_at: 'desc',
+    },
   })
 
   const filteredRatings = await prisma.rating.findMany({
@@ -210,6 +213,9 @@ export const getServerSideProps: GetServerSideProps = async ({
           categories: true,
         },
       },
+    },
+    orderBy: {
+      created_at: 'desc',
     },
   })
 
