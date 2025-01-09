@@ -12,6 +12,14 @@ export const TagBoxContainer = styled('div', {
     all: 'unset',
   },
 
+  transition: 'all 0.2s',
+
+  '&:hover': {
+    background: '$purple-200',
+    borderColor: '$purple-100',
+    color: '$gray-100',
+  },
+
   variants: {
     checked: {
       true: {

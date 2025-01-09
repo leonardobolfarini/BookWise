@@ -53,6 +53,7 @@ export const RatingFormTextarea = styled('textarea', {
   },
 
   '&:focus': {
+    borderColor: '$green-200',
     outline: 'none',
   },
 })
