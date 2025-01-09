@@ -84,6 +84,7 @@ export function Sidebar() {
               src={user.image}
               alt={user.name || ''}
               size="sm"
+              userId={user.id}
               hasBorder
             />
             {user?.name?.split(' ')[0]}
